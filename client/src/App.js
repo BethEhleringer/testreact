@@ -4,13 +4,13 @@ import Nav from "./components/Nav";
 import Input from "./components/Input";
 import Button from "./components/Button";
 import API from "./utils/API";
-import { RecipeList, RecipeListItem } from "./components/RecipeList";
+import { BookList, BookListItem } from "./components/BookList";
 import { Container, Row, Col } from "./components/Grid";
 
 class App extends Component {
   state = {
-    recipes: [],
-    recipeSearch: ""
+    books: [],
+    bookSearch: ""
   };
 
   handleInputChange = event => {
@@ -25,8 +25,8 @@ class App extends Component {
   handleFormSubmit = event => {
     // When the form is submitted, prevent its default behavior, get recipes update the recipes state
     event.preventDefault();
-    API.getRecipes(this.state.recipeSearch)
-      .then(res => this.setState({ recipes: res.data }))
+    API.getBooks(this.state.bookSearch)
+      .then(res => this.setState({ books: res.data }))
       .catch(err => console.log(err));
   };
 
@@ -43,10 +43,10 @@ class App extends Component {
                   <Row>
                     <Col size="xs-9 sm-10">
                       <Input
-                        name="recipeSearch"
-                        value={this.state.recipeSearch}
+                        name="bookSearch"
+                        value={this.state.bookSearch}
                         onChange={this.handleInputChange}
-                        placeholder="Search For a Recipe"
+                        placeholder="Search For a Book"
                       />
                     </Col>
                     <Col size="xs-3 sm-2">
@@ -65,24 +65,24 @@ class App extends Component {
           </Row>
           <Row>
             <Col size="xs-12">
-              {!this.state.recipes.length ? (
-                <h1 className="text-center">No Recipes to Display</h1>
+              {!this.state.books.length ? (
+                <h1 className="text-center">No Books to Display</h1>
               ) : (
-                  <RecipeList>
-                    {this.state.recipes.map(recipe => {
+                  <BookList>
+                    {this.state.books.map(books => {
                       return (
-                        <RecipeListItem
-                          key={recipe.title}
-                          title={recipe.title}
-                          href={recipe.href}
-                          ingredients={recipe.ingredients}
-                          thumbnail={recipe.thumbnail}
+                        <BookListItem
+                          key={books.title}
+                          title={books.title}
+                          authors={books.authors}
+                          description={books.description}
+                          image={books.image}
                         />
                       );
                     })}
-                  </RecipeList>
+                  </BookList>
                 )}
-              <h1>Render Recipes Here</h1>
+              <h1>Render Books Here</h1>
             </Col>
           </Row>
         </Container>
