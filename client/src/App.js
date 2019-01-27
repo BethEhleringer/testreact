@@ -12,6 +12,7 @@ class App extends Component {
     books: [],
     bookSearch: ""
   };
+  
 
   handleInputChange = event => {
     // Destructure the name and value properties off of event.target
