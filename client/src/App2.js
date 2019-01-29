@@ -1,18 +1,56 @@
 import React, { Component } from "react";
-import Jumbotron from "./components/Jumbotron";
-import Nav from "./components/Nav";
+import FriendCard from "./components/FriendCard";
+import Wrapper from "./components/Wrapper";
+//import Jumbotron from "./components/Jumbotron";
+//import Nav from "./components/Nav";
 import Input from "./components/Input";
 import Button from "./components/Button";
 import API from "./utils/API";
-import { BookList, BookListItem } from "./components/BookList";
-import { Container, Row, Col } from "./components/Grid";
+//import { BookList, BookListItem } from "./components/BookList";
+//import { Container, Row, Col } from "./components/Grid";
 
 class App extends Component {
   state = {
     books: [],
     bookSearch: ""
   };
+
+// new code from wk 19
+
+
+class App extends Component {
+    // Setting this.state.friends to the friends json array
+    state = {
+      books
+    }; 
   
+    
+  
+    // Map over this.state.friends and render a FriendCard component for each friend object
+    render() {
+      return (
+        <Wrapper>
+          <Title>Books List</Title>
+          {this.state.books.map(friend => (
+            <BookCard
+              
+              id={friend.id}
+              key={friend.id}
+              name={friend.name}
+              image={friend.image}
+              occupation={friend.occupation}
+              location={friend.location}
+            />
+          ))}
+        </Wrapper>
+      );
+    }
+  }
+  
+  export default App;
+  
+  
+// original code
 
   handleInputChange = event => {
     // Destructure the name and value properties off of event.target
