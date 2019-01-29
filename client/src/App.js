@@ -27,7 +27,7 @@ class App extends Component {
     // When the form is submitted, prevent its default behavior, get recipes update the recipes state
     event.preventDefault();
     API.getBooks(this.state.bookSearch)
-      .then(res => this.setState({ books: res.data }))
+      .then(res => {console.log(res);this.setState({ books: res.data })})
       .catch(err => console.log(err));
       
   };
@@ -71,14 +71,14 @@ class App extends Component {
                 <h1 className="text-center">No Books to Display</h1>
               ) : (
                   <BookList>
-                    {this.state.books.map(books => {
+                    {this.state.books.map(book => {
                       return (
                         <BookListItem
-                          key={books.title}
-                          title={books.title}
-                          authors={books.authors}
-                          description={books.description}
-                          image={books.image}
+                          key={book.id}
+                          title={book.volumeInfo.title}
+                          authors={book.volumeInfo.authors}
+                          description={book.volumeInfo.description}
+                          image={book.volumeInfo.image}
                         />
                       );
                     })}
